@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://kit.fontawesome.com/9c8c1521b1.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200;0,6..12,1000;1,6..12,200;1,6..12,1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <link rel="manifest" href="/manifest.webmanifest">
+    </head>
+
+    <style>
+        nav {
+            background-color: var(--board1);
+            font-family: "Nunito";
+            font-weight: 650;
+            font-size: 25px;
+            align-items: center;
+            text-align: center;
+            color: var(--fontcolor);
+            padding: 4px;
+            /*position: fixed;
+            bottom: 0;*/
+            white-space: nowrap; /* Prevents text from wrapping */
+            align-items: center;
+            word-spacing: 130%;
+            width: 99%;
+            display: flex; /* Add this line */
+            justify-content: space-around; /* Add this line */
+            overflow: hidden !important;
+        }
+        a {
+            color: var(--fontcolor);
+            opacity: 50%;
+            text-decoration: none;
+        } a:hover {
+            opacity: 100%;
+        }
+        nav button {
+            background: var(--board2);
+            color: var(--fontcolor);
+            border: 0;
+            padding: 7px;
+            font: 800 75% "Nunito";
+            word-spacing: 125%;
+        }
+    </style>
+
+    <body>
+        <nav>
+            <a href="home.html"><i class="cubing-icon event-333"></i> App</a>&nbsp;&nbsp;
+            <a href="timer.php"><i class="fa-solid fa-stopwatch"></i> Timer</a>&nbsp;&nbsp;
+            <a href="community.html"><i class="fa-solid fa-comments"></i> Community</a>&nbsp;&nbsp;
+            <a href="algs.html"><i class="fa-solid fa-cube"></i> Algorithms</a>&nbsp;&nbsp;
+            <a href="reconstruction.html"><i class="fa-solid fa-magnifying-glass"></i> Reconstructions</a>&nbsp;&nbsp;
+            <a href="settings.html"><i class="fa-solid fa-sliders"></i> Settings</a>&nbsp;&nbsp;
+            <a href="about.html"><i class="fa-solid fa-circle-info"></i> About</a>&nbsp;&nbsp;
+            <button id="signin"><i class="fa-solid fa-user"></i> SIGN IN</button>&nbsp;&nbsp;
+            <!--<button class="btn" id="navbutton"><i class="fa-solid fa-ellipsis"></i></button>-->
+        </nav>
+    </body> 
+</html>           

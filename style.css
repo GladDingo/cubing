@@ -1,0 +1,42 @@
+:root {
+    --board1: rgba(242, 242, 242, 1);
+    --board2: rgba(230, 230, 230, 1);
+    --board1hover: #e6e6e6;
+    --board2hover: #ccc;
+    --fontcolor: black;
+}
+
+body {
+    margin: 0;
+    background-color: #fff;
+    color: var(--fontcolor);
+}
+
+h1 {
+    color: var(--fontcolor);
+    font: 250 500% "Nunito";
+    text-align: center;
+    line-height: 30%;
+}
+
+h2 {
+    font-family: "Nunito" !important;
+    font-size: 200%;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --board1: #111111;
+        --board2: #222222;
+        --fontcolor: white;
+        --board1hover: #0d0d0d;
+    }
+
+    body {
+        background: black;
+    }
+}

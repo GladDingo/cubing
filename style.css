@@ -12,6 +12,28 @@ body {
     color: var(--fontcolor);
 }
 
+button {
+    background: var(--board2);
+    color: var(--fontcolor);
+    border: 0;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+input[type='text'], textarea {
+    background: var(--board2);
+    color: var(--fontcolor);
+    border: 0;
+    font-size: 150%;
+    font-family: "Nunito Sans";
+}
+
+textarea:focus, input:focus {
+    outline: 2px solid var(--fontcolor);
+}
+
 h1 {
     color: var(--fontcolor);
     font: 250 500% "Nunito";
@@ -22,10 +44,6 @@ h1 {
 h2 {
     font-family: "Nunito" !important;
     font-size: 200%;
-}
-
-button:hover {
-    cursor: pointer;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -14,7 +14,6 @@
         left: 10px;
         padding: 10px;
         font: 500 110% "Nunito";
-        height: 90%;
         display: flex;
         flex-direction: column;
     }
@@ -44,14 +43,40 @@
         gap: 5px;
     }
 
+    #sessiondropdown {
+        z-index: 5;
+    }
+
     #sessiondropdown button {
         width: 120px;
         background: var(--board2);
         display: flex;
     }
+
+    table,
+    th,
+    td {
+        background: var(--board2);
+    }
+
+    table {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+        position: fixed;
+        top: 120px;
+    }
+
+    #session1,
+    #session2,
+    #session3 {
+        transition: transform 0.1s ease-in-out;
+        rotate: x 90deg;
+    }
 </style>
 
 <body>
+    <?php include "createsession.php" ?>
     <div id="stats">
         <div id="sessionstuff">
             <!--Session:-->
@@ -64,26 +89,33 @@
                     <option value="4">4</option>
                 </select>-->
             <div id="sessiondropdown">
-                <button onclick="showSessions()">3x3</button>
+                <button id="dropdown-select">3x3</button>
                 <div class="dropdown-content" id="sessions">
-                    <button class="session">2x2</button>
-                    <button class="session">Megaminx</button>
-                    <button class="session">Square-1</button>
+                    <button class="session" id="session1">2x2</button>
+                    <button class="session" id="session2">Megaminx</button>
+                    <button class="session" id="session3">Square-1</button>
                 </div>
             </div>
             <button id="addsession"><i class="fa-solid fa-plus"></i></button>
         </div>
-        <table>
-            <tr>time</tr>
-            <tr>mo3</tr>
-            <tr>ao5</tr>
-            <tr>ao12</tr>
+        <table id="times">
+            <tr>
+                <th>time</th>
+                <th>mo3</th>
+                <th>ao5</th>
+                <th>ao12</th>
+            </tr>
         </table>
     </div>
 </body>
+
+<script src="script.js"></script>
+
 <script>
+
+    var allSessionsShown = false;
     document.getElementById('addsession').addEventListener("click", function (e) {
-        document.getElementById('cancelsession2').style.display = "none";
+
         flip(document.getElementById("createsession"));
         /*setTimeout(function() {
                 if (document.getElementById('createsession').contains(e.target)){
@@ -93,6 +125,42 @@
                 }
         }, (1));*/
     })
+    
+    var windowHeight = window.innerHeight;
+    document.getElementById("stats").style.height = (windowHeight - 100) + "px";
+
+    window.addEventListener('resize', function() {
+        windowHeight = window.innerHeight;
+        document.getElementById("stats").style.height = (windowHeight - 100) + "px";
+    });
+
+    function showSessions() {
+        if (allSessionsShown === false) {
+            inverseFlip(document.getElementById("session1"));
+            setTimeout(function () {
+                inverseFlip(document.getElementById("session2"));
+                setTimeout(function () {
+                    inverseFlip(document.getElementById("session3"));
+                }, 40);
+            }, 40);
+            allSessionsShown = true;
+        }
+
+        else {
+            document.getElementById("session3").style.transform = 'rotateX(0deg)';
+            setTimeout(function () {
+                document.getElementById("session2").style.transform = 'rotateX(0deg)';
+                setTimeout(function () {
+                    document.getElementById("session1").style.transform = 'rotateX(0deg)';
+                }, 40);
+            }, 40);
+            allSessionsShown = false;
+        }
+
+    }
+    document.getElementById("dropdown-select").addEventListener("click", function () {
+        showSessions();
+    }) 
 </script>
 
 </html>

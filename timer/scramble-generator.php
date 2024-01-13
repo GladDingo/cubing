@@ -36,7 +36,7 @@
         position: absolute;
         top: 65px;
         right: 10px;
-        width: 77.5%;
+        /*width: 77.5%;*/
     }
 
     #scramble-generator button {
@@ -52,13 +52,14 @@
         /* Align buttons to the far right */
         margin-right: 20px;
         /* Add margin to create space between scramble and buttons */
-        width: 100%;
+        /*width: 100%;
         /* Make the container span the entire width of the page */
+        position: relative;
     }
 
     #scramble-display {
         /* Style for the scramble display area */
-        width: 100%;
+        /*width: 100%;*/
         /* Make the scramble display area span the entire width */
     }
 
@@ -72,6 +73,12 @@
         text-align: center;
         margin-right: 10px;
         /* Add margin to create space between buttons */
+    }
+
+    #copy {
+        position: absolute;
+        left: 5px;
+        top: 5px;
     }
 
     #scramble-options {
@@ -408,6 +415,14 @@
             scrambleOptionsShown = false;
         }
     }
+
+    var windowWidth = window.innerWidth;
+    document.getElementById("scramble-container").style.width = (windowWidth - 300) + "px";
+
+    window.addEventListener('resize', function() {
+        windowWidth = window.innerWidth;
+        document.getElementById("scramble-container").style.width = (windowWidth - 300) + "px";
+    })
 </script>
 
 </html>

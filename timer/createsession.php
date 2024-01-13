@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <style>
+    button {
+        cursor: pointer;
+    }
+
     #createsession {
         background: var(--board1);
         color: var(--fontcolor);
@@ -40,8 +44,7 @@
         transform-origin: top center;
     }
 
-    #cancelsession,
-    #cancelsession2 {
+    #cancelsession {
         background: var(--board2);
         color: var(--fontcolor);
         border: 0;
@@ -97,11 +100,18 @@
         font: 650 125% "Nunito";
         width: 100px;
         position: fixed;
-        right: 2%;
         top: 80%;
         rotate: y 90deg;
         transition: transform 0.2s ease-in-out;
         transform-origin: right;
+    }
+
+    #done {
+        right: 2%;
+    }
+
+    #sessionback {
+        right: 20%;
     }
 
     #step2 input[type='text'] {
@@ -119,8 +129,9 @@
 
 <body>
     <div id="createsession">
-        <button id="cancelsession"><i class="fa-solid fa-xmark"></i></button>
-        <button id="cancelsession2"><i class="fa-solid fa-xmark"></i></button>
+        <button id="cancelsession"
+            onclick="document.getElementById('createsession').style.transform = 'rotateX(0deg)'"><i
+                class="fa-solid fa-xmark"></i></button>
         <div id="sessionbigheader1">Create session</div>
         <div id="timerbuttondiv">
             <button id="timerbutton">
@@ -145,13 +156,146 @@
                 <input type="radio" class="puzzle" id="pyram"><i class="cubing-icon event-pyram"></i>Pyraminx</button>
                 <input type="radio" class="puzzle" id="skewb"><i class="cubing-icon event-skewb"></i>Skewb</button>
                 <input type="radio" class="puzzle" id="sq1"><i class="cubing-icon event-sq1"></i>Square-1</button>-->
-            <button id="done" onclick="flip(document.getElementById('createsession'))"><span id="testspan"><i
-                        class="fa-solid fa-check"></i> Done</span></button>
+            <button id="sessionback"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button id="done"><i class="fa-solid fa-check"></i> Done</button>
         </div>
     </div>
 </body>
 <script>
-    
+    function cancelSession() {
+        document.getElementById('createsession').style.transform = "rotateX(0deg)";
+        setTimeout(function () {
+            document.getElementById('nameerror').style.display = 'none';
+            document.getElementById("sessionbigheader1").style.transform = 'rotateX(0deg)';
+            document.getElementById("timerbuttondiv").style.transform = 'rotateX(0deg)';
+            document.getElementById("trainerbuttondiv").style.transform = 'rotateX(0deg)';
+            document.getElementById("sessionbigheader2").style.transition = 'transform 0s';
+            document.getElementById("sessionname").style.transition = 'transform 0s';
+            document.getElementById("done").style.transition = 'transform 0s';
+            document.getElementById("sessionback").style.transition = 'transform 0s';
+            document.getElementById("sessionbigheader2").style.transform = 'rotateY(0deg)';
+            document.getElementById("sessionname").style.transform = 'rotateY(0deg)';
+            document.getElementById("done").style.transform = 'rotateY(0deg)';
+            document.getElementById("sessionback").style.transform = 'rotateY(0deg)';
+            document.getElementById("sessionbigheader2").style.transition = 'transform 0.2s ease-in-out';
+            document.getElementById("sessionname").style.transition = 'transform 0.2s ease-in-out';
+            document.getElementById("done").style.transition = 'transform 0.2s ease-in-out';            
+            document.getElementById("sessionback").style.transition = 'transform 0.2s ease-in-out';
+            document.getElementById("sessionname").value = '';
+        }, (150));
+    }
+    document.getElementById('cancelsession').addEventListener("click", cancelSession);
+
+    document.getElementById('timerbutton').addEventListener("click", function () {
+        flip(document.getElementById("sessionbigheader1"));
+        setTimeout(function () {
+            flip(document.getElementById("timerbuttondiv"));
+            setTimeout(function () {
+                flip(document.getElementById("trainerbuttondiv"));
+                setTimeout(function () {
+                    // document.getElementById('step2').style.transform = 'rotateY(-90deg)';
+                    document.getElementById('sessionbigheader2').style.transform = 'rotateY(-90deg)';
+                    setTimeout(function () {
+                        document.getElementById('sessionname').style.transform = 'rotateY(-90deg)';
+                        setTimeout(function () {
+                            document.getElementById('done').style.transform = 'rotateY(-90deg)';
+                            document.getElementById('createsession').addEventListener('keypress', function (e) {
+                                if (e.key === 'Enter') {
+                                    document.getElementById('done').click();
+                                }
+                            });
+                            setTimeout(function () {
+                                document.getElementById('sessionback').style.transform = 'rotateY(-90deg)';
+                            }, (40));
+                        }, (40));
+                    }, (40));
+                }, (100));
+            }, (40));
+        }, (40));
+    });
+
+    document.getElementById('trainerbutton').addEventListener("click", function () {
+        flip(document.getElementById("sessionbigheader1"));
+        setTimeout(function () {
+            flip(document.getElementById("timerbuttondiv"));
+            setTimeout(function () {
+                flip(document.getElementById("trainerbuttondiv"));
+                setTimeout(function () {
+                    // document.getElementById('step2').style.transform = 'rotateY(-90deg)';
+                    document.getElementById('sessionbigheader2').style.transform = 'rotateY(-90deg)';
+                    setTimeout(function () {
+                        document.getElementById('sessionname').style.transform = 'rotateY(-90deg)';
+                        setTimeout(function () {
+                            document.getElementById('done').style.transform = 'rotateY(-90deg)';
+                            document.getElementById('createsession').addEventListener('keypress', function (e) {
+                                if (e.key === 'Enter') {
+                                    document.getElementById('done').click();
+                                }
+                            });
+                            setTimeout(function () {
+                                document.getElementById('sessionback').style.transform = 'rotateY(-90deg)';
+                            }, (40));
+                        }, (40));
+                    }, (40));
+                }, (100));
+            }, (40));
+        }, (40));
+    });
+
+    document.getElementById('sessionback').addEventListener("click", function() {
+        document.getElementById('sessionback').style.transform = 'rotateY(0deg)';
+        setTimeout(() => {
+            document.getElementById('done').style.transform = 'rotateY(0deg)';
+            setTimeout(() => {
+                document.getElementById('sessionname').style.transform = 'rotateY(0deg)';
+                setTimeout(() => {
+                    document.getElementById('sessionbigheader2').style.transform = 'rotateY(0deg)';
+                    setTimeout(() => {
+                        document.getElementById("timerbuttondiv").style.transition = 'transform 0.2s ease-in-out';
+                        document.getElementById("trainerbuttondiv").style.transition = 'transform 0.2s ease-in-out';
+                        document.getElementById("trainerbuttondiv").style.transform = 'rotateY(0deg)';
+                        setTimeout(() => {
+                            document.getElementById("timerbuttondiv").style.transform = 'rotateY(0deg)';
+                            setTimeout(() => {
+                                document.getElementById("sessionbigheader1").style.transform = 'rotateY(0deg)';
+                            }, 40);
+                        }, 40);
+                    }, 100);
+                }, 40);
+            }, 40);
+        }, 40);
+    });
+
+    document.getElementById('done').addEventListener("click", function () {
+        if (!document.getElementById('sessionname').value.match(/\S/))
+            document.getElementById('nameerror').style.display = 'inline';
+        else {
+            document.getElementById('createsession').style.transform = 'rotateX(0deg)';
+            setTimeout(function () {
+                document.getElementById('nameerror').style.display = 'none';
+                document.getElementById("sessionbigheader1").style.transform = 'rotateX(0deg)';
+                document.getElementById("timerbuttondiv").style.transform = 'rotateX(0deg)';
+                document.getElementById("trainerbuttondiv").style.transform = 'rotateX(0deg)';
+                document.getElementById("sessionbigheader2").style.transition = 'transform 0s';
+                document.getElementById("sessionname").style.transition = 'transform 0s';
+                document.getElementById("done").style.transition = 'transform 0s';
+                document.getElementById("sessionbigheader2").style.transform = 'rotateY(0deg)';
+                document.getElementById("sessionname").style.transform = 'rotateY(0deg)';
+                document.getElementById("done").style.transform = 'rotateY(0deg)';
+                document.getElementById("sessionbigheader2").style.transition = 'transform 0.2s ease-in-out';
+                document.getElementById("sessionname").style.transition = 'transform 0.2s ease-in-out';
+                document.getElementById("done").style.transition = 'transform 0.2s ease-in-out';
+                document.getElementById("sessionname").value = '';
+                document.getElementById('cancelsession').style.display = "inline";
+            }, (150));
+        }
+    })
+
+    /*function showSessions() {
+        if (sessionsShown === false) {
+            document.querySelector('session').inverseFlip();
+        }
+    }*/
 </script>
 
 </html>

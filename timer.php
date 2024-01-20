@@ -9,6 +9,7 @@
     <link rel="icon" type="image/x-icon" href="/images/logo.png">
     <script src="https://kit.fontawesome.com/9c8c1521b1.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./tools/toolstyle.css">
     <link rel="stylesheet" href="https://icons.cubing.net/css/cubing-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,6 +24,7 @@
 <style>
     body {
         background: var(--bg);
+        overflow: hidden;
     }
     button {
         background: var(--board2);
@@ -47,6 +49,7 @@
     input:focus {
         outline: 2px solid var(--fontcolor);
     }
+
 </style>
 
 <body>
@@ -54,9 +57,14 @@
     include "timer/onscreentimer.php";
     include "timer/scramble-generator.php";
     include "timer/leftbar.php";
-    include "timer/createsession.php" ?>
+    include "timer/createsession.php";
+    include "timer/tools/drawscramble.php" ?>
 </body>
 
 <script src="script.js">
+
+<script>
+
+</script>
 
 </html>

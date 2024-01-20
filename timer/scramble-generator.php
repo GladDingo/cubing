@@ -58,6 +58,7 @@
     }
 
     #scramble-display {
+        flex-grow: 1;
         /* Style for the scramble display area */
         /*width: 100%;*/
         /* Make the scramble display area span the entire width */

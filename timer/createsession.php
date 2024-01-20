@@ -21,9 +21,9 @@
         position: absolute;
         top: 30%;
         left: 30%;
-        rotate: x -90deg;
-        transition: transform 0.15s ease-in-out;
-        transform-origin: center;
+        rotate: x 90deg;
+        transition: transform 0.2s ease-in-out;
+        transform-origin: top;
     }
 
     #timerbutton,
@@ -38,9 +38,15 @@
         text-align: left;
     }
 
-    #timerbuttondiv,
+    #timerbuttondiv {
+        rotate: x 90deg;
+        transition: transform 0.2s ease-in-out;
+        transform-origin: top center;
+    }
+
     #trainerbuttondiv {
-        transition: transform 0.1s ease-in-out;
+        rotate: x 90deg;
+        transition: transform 0.2s ease-in-out;
         transform-origin: top center;
     }
 
@@ -63,7 +69,8 @@
 
     #sessionbigheader1 {
         transform-origin: top center;
-        transition: transform 0.1s ease-in-out;
+        transition: transform 0.2s ease-in-out;
+        rotate: x 90deg;
     }
 
     #sessionbigheader2 {
@@ -125,6 +132,10 @@
         font: 600 110% "Nunito Sans";
         display: none;
     }
+
+    #sessionpuzzle input[type="radio"] {
+        background: var(--board2);
+    }
 </style>
 
 <body>
@@ -149,13 +160,14 @@
             <div id="sessionbigheader2">Name your session</div>
             <input type="text" name="sessionname" id="sessionname">
             <span id="nameerror">ERROR: Session must have a name.</span>
-            <!--<h2>Puzzle:</h2>
+            <div id="sessionpuzzle">
                 <input type="radio" class="puzzle" id="2x2"><i class="cubing-icon event-222"></i>2x2</button>
                 <input type="radio" class="puzzle" id="3x3"><i class="cubing-icon event-333"></i>3x3</button>
                 <input type="radio" class="puzzle" id="4x4"><i class="cubing-icon event-444"></i>4x4</button>
                 <input type="radio" class="puzzle" id="pyram"><i class="cubing-icon event-pyram"></i>Pyraminx</button>
                 <input type="radio" class="puzzle" id="skewb"><i class="cubing-icon event-skewb"></i>Skewb</button>
-                <input type="radio" class="puzzle" id="sq1"><i class="cubing-icon event-sq1"></i>Square-1</button>-->
+                <input type="radio" class="puzzle" id="sq1"><i class="cubing-icon event-sq1"></i>Square-1</button>
+            </div>
             <button id="sessionback"><i class="fa-solid fa-arrow-left"></i> Back</button>
             <button id="done"><i class="fa-solid fa-check"></i> Done</button>
         </div>
@@ -179,7 +191,7 @@
             document.getElementById("sessionback").style.transform = 'rotateY(0deg)';
             document.getElementById("sessionbigheader2").style.transition = 'transform 0.2s ease-in-out';
             document.getElementById("sessionname").style.transition = 'transform 0.2s ease-in-out';
-            document.getElementById("done").style.transition = 'transform 0.2s ease-in-out';            
+            document.getElementById("done").style.transition = 'transform 0.2s ease-in-out';
             document.getElementById("sessionback").style.transition = 'transform 0.2s ease-in-out';
             document.getElementById("sessionname").value = '';
         }, (150));
@@ -187,11 +199,14 @@
     document.getElementById('cancelsession').addEventListener("click", cancelSession);
 
     document.getElementById('timerbutton').addEventListener("click", function () {
-        flip(document.getElementById("sessionbigheader1"));
+        document.getElementById("sessionbigheader1").style.transformOrigin = "left";
+        document.getElementById("sessionbigheader1").style.transform = "rotateX(-90deg) rotateY(90deg)";
         setTimeout(function () {
-            flip(document.getElementById("timerbuttondiv"));
+            document.getElementById("timerbuttondiv").style.transformOrigin = "left";
+            document.getElementById("timerbuttondiv").style.transform = "rotateX(-90deg) rotateY(90deg)";
             setTimeout(function () {
-                flip(document.getElementById("trainerbuttondiv"));
+                document.getElementById("trainerbuttondiv").style.transformOrigin = "left";
+                document.getElementById("trainerbuttondiv").style.transform = "rotateX(-90deg) rotateY(90deg)";
                 setTimeout(function () {
                     // document.getElementById('step2').style.transform = 'rotateY(-90deg)';
                     document.getElementById('sessionbigheader2').style.transform = 'rotateY(-90deg)';
@@ -215,11 +230,11 @@
     });
 
     document.getElementById('trainerbutton').addEventListener("click", function () {
-        flip(document.getElementById("sessionbigheader1"));
+        document.getElementById("sessionbigheader1").style.transform = "rotateX(0deg)";
         setTimeout(function () {
-            flip(document.getElementById("timerbuttondiv"));
+            document.getElementById("timerbuttondiv").style.transform = "rotateX(0deg)";
             setTimeout(function () {
-                flip(document.getElementById("trainerbuttondiv"));
+                document.getElementById("trainerbuttondiv").style.transform = "rotateX(0deg)";
                 setTimeout(function () {
                     // document.getElementById('step2').style.transform = 'rotateY(-90deg)';
                     document.getElementById('sessionbigheader2').style.transform = 'rotateY(-90deg)';
@@ -242,7 +257,7 @@
         }, (40));
     });
 
-    document.getElementById('sessionback').addEventListener("click", function() {
+    document.getElementById('sessionback').addEventListener("click", function () {
         document.getElementById('sessionback').style.transform = 'rotateY(0deg)';
         setTimeout(() => {
             document.getElementById('done').style.transform = 'rotateY(0deg)';
@@ -251,13 +266,14 @@
                 setTimeout(() => {
                     document.getElementById('sessionbigheader2').style.transform = 'rotateY(0deg)';
                     setTimeout(() => {
+                        document.getElementById("sessionbigheader1").style.transition = 'transform 0.2s ease-in-out';
                         document.getElementById("timerbuttondiv").style.transition = 'transform 0.2s ease-in-out';
                         document.getElementById("trainerbuttondiv").style.transition = 'transform 0.2s ease-in-out';
-                        document.getElementById("trainerbuttondiv").style.transform = 'rotateY(0deg)';
+                        document.getElementById("trainerbuttondiv").style.transform = 'rotateX(-90deg)';
                         setTimeout(() => {
-                            document.getElementById("timerbuttondiv").style.transform = 'rotateY(0deg)';
+                            document.getElementById("timerbuttondiv").style.transform = 'rotateX(-90deg)';
                             setTimeout(() => {
-                                document.getElementById("sessionbigheader1").style.transform = 'rotateY(0deg)';
+                                document.getElementById("sessionbigheader1").style.transform = 'rotateX(-90deg)';
                             }, 40);
                         }, 40);
                     }, 100);

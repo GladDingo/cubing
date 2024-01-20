@@ -115,15 +115,16 @@
 
     var allSessionsShown = false;
     document.getElementById('addsession').addEventListener("click", function (e) {
-
-        flip(document.getElementById("createsession"));
-        /*setTimeout(function() {
-                if (document.getElementById('createsession').contains(e.target)){
-                    alert("Clicked in Box");
-                } else {
-                    inverseFlip(document.getElementById('createsession'));
-                }
-        }, (1));*/
+        inverseFlip(document.getElementById("createsession"));
+        setTimeout(() => {
+            inverseFlip(document.getElementById("sessionbigheader1"));
+            setTimeout(() => {
+                inverseFlip(document.getElementById("timerbuttondiv"));
+                setTimeout(() => {
+                    inverseFlip(document.getElementById("trainerbuttondiv"));
+                }, 40);
+            }, 40);
+        }, 40);
     })
     
     var windowHeight = window.innerHeight;

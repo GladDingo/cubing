@@ -28,7 +28,7 @@
         align-items: center;
         /* Align vertically centered */
         font-family: "Nunito Sans";
-        font-weight: 410;
+        font-weight: 460;
         font-size: 180%;
         text-align: center;
         padding: 10px;
@@ -83,24 +83,25 @@
     }
 
     #scramble-options {
-        background: var(--board2);
+        background: var(--board1);
         color: var(--fontcolor);
         padding: 10px;
         font-size: 125%;
         text-align: center;
-        width: 77.5%;
         position: absolute;
-        top: 128px;
+        top: 127px;
         right: 10px;
         font-family: "Nunito Sans";
-        rotate: x 90deg;
+        rotate: x -90deg;
         transition: transform 0.2s;
         transform-origin: top center;
+        display: flex;
+        flex-direction: row;
     }
 
     #scramble-options input[type='number'],
     #scramble-options select {
-        background: var(--board1);
+        background: var(--board2);
         color: var(--fontcolor);
         border: 0;
         font: 500 100% "Nunito Sans";
@@ -113,6 +114,8 @@
 </style>
 
 <body>
+    <!--<?php include "scrambles/3x3.php" ?>-->
+
     <div id="scramble-generator">
         <!--<div class="mover">
                 …
@@ -126,9 +129,7 @@
             </div>
             <div><button id="generate-button" title="New scramble"><i
                         class="fa-solid fa-arrow-rotate-right"></i></button></div>
-            <div><button id="show-scramble-options"
-                    onclick="showScrambleOptions(document.getElementById('scramble-options'))"
-                    title="Options"><!--<i class="fa-solid fa-ellipsis">--><i class="fa-solid fa-gear"></i></i></button>
+            <div><button id="show-scramble-options" title="Options"><!--<i class="fa-solid fa-ellipsis">--><i class="fa-solid fa-chevron-down"></i></button>
             </div>
         </div>
 
@@ -139,6 +140,7 @@
             <label for="cubetype">Puzzle:</label>
             <select id="cubetype">
                 <option id="3x3">3x3</option>
+                <option id="megaminx">Megaminx</option>
             </select>
         </div>
         &nbsp;&nbsp;
@@ -150,24 +152,9 @@
 </body>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var clipboard = new ClipboardJS('#copy');
-        let scrambleOptionsShown = false;
-        var sessionsShown = false;
 
-        clipboard.on('success', function (e) {
-            console.log('Scramble copied:', e.text);
-            e.clearSelection();
-        });
+    var scrambleOptionsShown = false;
 
-        clipboard.on('error', function (e) {
-            console.error('Failed to copy text:', e.text);
-        });
-    });
-
-    let scrambleGeneratedManually = false;
-
-    // Define an array of possible moves
     const moves = ["U", "U'", "U2", "D", "D'", "D2", "L", "L'", "L2", "R", "R'", "R2", "F", "F'", "F2", "B", "B'", "B2"];
 
     const newScramble = generateScramble();
@@ -387,7 +374,23 @@
         return scramble.trim();
     }
 
+    ////
 
+    document.addEventListener('DOMContentLoaded', function () {
+        var clipboard = new ClipboardJS('#copy');
+        var sessionsShown = false;
+
+        clipboard.on('success', function (e) {
+            console.log('Scramble copied:', e.text);
+            e.clearSelection();
+        });
+
+        clipboard.on('error', function (e) {
+            console.error('Failed to copy text:', e.text);
+        });
+    });
+
+    let scrambleGeneratedManually = false;
 
     // Function to update the scramble display on the webpage
     function updateScrambleDisplay(scramble) {
@@ -407,22 +410,26 @@
         this.setAttribute('title', "Copied!");
     })
 
-    function showScrambleOptions(scrambleOptions) {
-        if (scrambleOptionsShown == false) {
-            flip(scrambleOptions);
+    document.getElementById("show-scramble-options").addEventListener("click", function () {
+        if (scrambleOptionsShown === false) {
+            flip(document.getElementById("scramble-options"));
             scrambleOptionsShown = true;
         } else {
-            inverseFlip(scrambleOptions);
+            document.getElementById("scramble-options").style.transform = "rotateX(0deg)";
             scrambleOptionsShown = false;
         }
-    }
+    })
+
+
 
     var windowWidth = window.innerWidth;
     document.getElementById("scramble-container").style.width = (windowWidth - 300) + "px";
+    document.getElementById("scramble-options").style.width = (windowWidth - 280) + "px";
 
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', function () {
         windowWidth = window.innerWidth;
         document.getElementById("scramble-container").style.width = (windowWidth - 300) + "px";
+        document.getElementById("scramble-options").style.width = (windowWidth - 280) + "px";
     })
 </script>
 

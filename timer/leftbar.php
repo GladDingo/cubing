@@ -19,7 +19,10 @@
     }
 
     #stats button,
-    #stats select {
+    #stats select,
+    #session1,
+    #session2,
+    #session3 {
         background: var(--board2);
         color: var(--fontcolor);
         border: 0;
@@ -53,18 +56,20 @@
         display: flex;
     }
 
-    table,
     th,
     td {
         background: var(--board2);
+        padding: 5px;
     }
 
     table {
-        display: flex;
-        gap: 5px;
-        justify-content: center;
+        text-align: center;
         position: fixed;
-        top: 120px;
+        top: 150px;
+        left: 16px;
+        border-collapse: separate;
+        border-spacing: 5px;
+        background-color: var(--board1);
     }
 
     #session1,
@@ -72,6 +77,13 @@
     #session3 {
         transition: transform 0.1s ease-in-out;
         rotate: x 90deg;
+    }
+
+    #counter {
+        font: 750 italic 125% "Nunito";
+        align-self: center;
+        position: fixed;
+        top: 120px;
     }
 </style>
 
@@ -89,21 +101,28 @@
                     <option value="4">4</option>
                 </select>-->
             <div id="sessiondropdown">
-                <button id="dropdown-select">3x3</button>
+                <button id="dropdown-select">1</button>
                 <div class="dropdown-content" id="sessions">
-                    <button class="session" id="session1">2x2</button>
-                    <button class="session" id="session2">Megaminx</button>
-                    <button class="session" id="session3">Square-1</button>
+                    <div id="session1">2</div>
+                    <div id="session2">3</div>
+                    <div id="session3">4</div>
                 </div>
             </div>
             <button id="addsession"><i class="fa-solid fa-plus"></i></button>
         </div>
+        <span id="counter">0/0 solves</span>
         <table id="times">
             <tr>
                 <th>time</th>
                 <th>mo3</th>
                 <th>ao5</th>
                 <th>ao12</th>
+            </tr>
+            <tr data='1'>
+                <td class="times">6.66</td>
+                <td class="times">N/A</td>
+                <td class="times">N/A</td>
+                <td class="times">N/A</td>
             </tr>
         </table>
     </div>
@@ -115,27 +134,30 @@
 
     var allSessionsShown = false;
     document.getElementById('addsession').addEventListener("click", function (e) {
-        inverseFlip(document.getElementById("createsession"));
+        flip(document.getElementById("createsession"));
         setTimeout(() => {
             inverseFlip(document.getElementById("sessionbigheader1"));
             setTimeout(() => {
                 inverseFlip(document.getElementById("timerbuttondiv"));
                 setTimeout(() => {
                     inverseFlip(document.getElementById("trainerbuttondiv"));
+                    setTimeout(() => {
+                        inverseFlip(document.getElementById("untimedbuttondiv"));
+                    }, 40);
                 }, 40);
             }, 40);
         }, 40);
     })
-    
+
     var windowHeight = window.innerHeight;
     document.getElementById("stats").style.height = (windowHeight - 100) + "px";
 
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', function () {
         windowHeight = window.innerHeight;
         document.getElementById("stats").style.height = (windowHeight - 100) + "px";
     });
 
-    function showSessions() {
+    document.getElementById("dropdown-select").addEventListener("click", function () {
         if (allSessionsShown === false) {
             inverseFlip(document.getElementById("session1"));
             setTimeout(function () {
@@ -145,9 +167,7 @@
                 }, 40);
             }, 40);
             allSessionsShown = true;
-        }
-
-        else {
+        } else {
             document.getElementById("session3").style.transform = 'rotateX(0deg)';
             setTimeout(function () {
                 document.getElementById("session2").style.transform = 'rotateX(0deg)';
@@ -157,11 +177,10 @@
             }, 40);
             allSessionsShown = false;
         }
+    })
 
-    }
-    document.getElementById("dropdown-select").addEventListener("click", function () {
-        showSessions();
-    }) 
+
+
 </script>
 
 </html>

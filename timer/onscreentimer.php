@@ -80,7 +80,6 @@
         document.getElementById('timer').style.color = 'red';
         clearInterval(timerInterval);
         timerInterval = null;
-
         const newScramble = generateScramble();
         updateScrambleDisplay(newScramble);
     }

@@ -19,10 +19,11 @@
 <body>
     <div class="tool" id="drawscramble">
         <div class="cubedimensionselector">
+            <!--
             <input type="radio" name="showscramble" id="2d">
             <label for="2d">2D</label>
             <input type="radio" name="showscramble" id="3d">
-            <label for="3d">3D</label>
+            <label for="3d">3D</label>-->
         </div>
     </div>
 </body>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timer</title>
-    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <script src="https://kit.fontawesome.com/9c8c1521b1.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./tools/toolstyle.css">
@@ -58,13 +58,10 @@
     include "timer/scramble-generator.php";
     include "timer/leftbar.php";
     include "timer/createsession.php";
-    include "timer/tools/drawscramble.php" ?>
+    include "timer/tools/drawscramble.php";
+    //include "settings.php" ?>
 </body>
 
 <script src="script.js">
-
-<script>
-
-</script>
 
 </html>

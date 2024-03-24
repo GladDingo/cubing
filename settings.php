@@ -56,6 +56,22 @@
     #timertype input[type='radio']:checked+label {
         border: 2px white;
     }
+
+    .dragarea {
+        display: flex;
+        gap: 20px;
+    }
+
+    #timerdecimaldragarea {
+        position: relative;
+        top: 10px;
+    }
+
+    .numbercard {
+        background: var(--board2);
+        font: 600 600% "Nunito";
+        width: 180px !important;
+    }
 </style>
 
 <body>
@@ -75,9 +91,17 @@
         </div>
         <div class="setting">
             <label for="timerdigits">Timer decimal places:</label>
-            <input type="number" min="0" max="5" name="timerdigits" id="timerdigits">
+            <!--<input type="number" min="0" max="5" name="timerdigits" id="timerdigits">
             <button class="increment" id="decimalincrement"><i class="fa-solid fa-plus"></i></button>
-            <button class="decrement" id="decimaleecrement"><i class="fa-solid fa-minus"></i></button>
+            <button class="decrement" id="decimaleecrement"><i class="fa-solid fa-minus"></i></button>-->
+            <div class="dragarea" id="timerdecimaldragarea">
+                <div class="numbercard" id="lefttimerdeccard1">0</div>
+                <div class="numbercard" id="lefttimerdeccard1">1</div>
+                <div class="numbercard" id="maintimerdeccard">2</div>
+                <div class="numbercard" id="lefttimerdeccard1">3</div>
+                <div class="numbercard" id="lefttimerdeccard1">4</div>
+                <div class="numbercard" id="lefttimerdeccard1">5</div>
+            </div>
         </div>
     </div>
 </body>

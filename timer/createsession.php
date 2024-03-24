@@ -39,7 +39,9 @@
         text-align: left;
     }
 
-    #timerbuttondiv, #trainerbuttondiv, #untimedbuttondiv {
+    #timerbuttondiv,
+    #trainerbuttondiv,
+    #untimedbuttondiv {
         rotate: x 90deg;
         transition: transform 0.2s ease-in-out;
         transform-origin: top center;
@@ -135,9 +137,7 @@
 
 <body>
     <div id="createsession">
-        <button id="cancelsession"
-            onclick="document.getElementById('createsession').style.transform = 'rotateX(0deg)'"><i
-                class="fa-solid fa-xmark"></i></button>
+        <button id="cancelsession"><i class="fa-solid fa-xmark"></i></button>
         <div id="sessionbigheader1">Create session</div>
         <div id="timerbuttondiv">
             <button id="timerbutton">
@@ -211,7 +211,7 @@
             }, (40));
         }, (40));
     }
-    function cancelSession() {
+    document.getElementById('cancelsession').addEventListener('click', function () {
         document.getElementById('createsession').style.transform = "rotateX(0deg)";
         setTimeout(function () {
             document.getElementById('nameerror').style.display = 'none';
@@ -233,8 +233,7 @@
             document.getElementById("sessionback").style.transition = 'transform 0.2s ease-in-out';
             document.getElementById("sessionname").value = '';
         }, (150));
-    }
-    document.getElementById('cancelsession').addEventListener("click", cancelSession);
+    });
 
     document.getElementById('timerbutton').addEventListener("click", function () {
         step2Transition();

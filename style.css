@@ -22,7 +22,7 @@ button:hover {
     cursor: pointer;
 }
 
-input[type='text'], textarea {
+input[type='text'], textarea, input[type='password'] {
     background: var(--board2);
     color: var(--fontcolor);
     border: 0;

@@ -34,6 +34,8 @@
             id="decimalpoint">.</span><!----><span id="count">00</span></div>
 </body>
 
+<script src="entertime.js"></script>
+
 <script>
     let startTime;
     let timerInterval;
@@ -82,6 +84,7 @@
         timerInterval = null;
         const newScramble = generateScramble();
         updateScrambleDisplay(newScramble);
+        enterTime(document.getElementById('timer'));
     }
 
     function resetAndStartTimer() {

@@ -83,17 +83,17 @@
     }
 
     #scramble-options {
+        z-index: -1;
         background: var(--board1);
         color: var(--fontcolor);
         padding: 10px;
         font-size: 125%;
         text-align: center;
         position: absolute;
-        top: 127px;
+        top: 77px; /* transforms to 127px */
         right: 10px;
         font-family: "Nunito Sans";
-        rotate: x -90deg;
-        transition: transform 0.2s;
+        transition: all 0.1s ease-in-out;
         transform-origin: top center;
         display: flex;
         flex-direction: row;
@@ -412,7 +412,10 @@
 
     document.getElementById("show-scramble-options").addEventListener("click", function () {
         if (scrambleOptionsShown === false) {
-            flip(document.getElementById("scramble-options"));
+            document.getElementById("scramble-options").style.top = "127px";
+            setTimeout(() => {
+                document.getElementById("scramble-options").style.top = "120px";
+            }, 100);
             scrambleOptionsShown = true;
         } else {
             document.getElementById("scramble-options").style.transform = "rotateX(0deg)";

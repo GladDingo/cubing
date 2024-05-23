@@ -39,18 +39,13 @@
         /*width: 77.5%;*/
     }
 
-    #scramble-generator button {
-        background: var(--board2);
-        color: var(--fontcolor);
-    }
-
     #scramble-container {
         display: flex;
         align-items: center;
         /* Center vertically within the container */
         justify-content: flex-end;
         /* Align buttons to the far right */
-        margin-right: 20px;
+        margin-right: 108px;
         /* Add margin to create space between scramble and buttons */
         /*width: 100%;
         /* Make the container span the entire width of the page */
@@ -64,10 +59,18 @@
         /* Make the scramble display area span the entire width */
     }
 
-    #generate-button,
-    #show-scramble-options,
-    #copy {
-        background: var(--board1);
+    .scramble-buttons {
+	background: var(--board1);
+	padding: 10px;
+	display: flex;
+	position: fixed;
+	top: 65px;
+	width: 82px;
+    }
+
+    .scramble-buttons button {
+	background: var(--board2);
+        color: var(--fontcolor);
         border-width: 0;
         padding: 10px;
         width: 36px;
@@ -76,11 +79,19 @@
         /* Add margin to create space between buttons */
     }
 
-    #copy {
+    #left-scramble-buttons {
+	left: 251px;
+    }
+
+    #right-scramble-buttons {
+	right: 10px;
+    }
+
+    /*#copy {
         position: absolute;
         left: 5px;
         top: 5px;
-    }
+    }*/
 
     #scramble-options {
         z-index: -1;
@@ -90,7 +101,7 @@
         font-size: 125%;
         text-align: center;
         position: absolute;
-        top: 77px; /* transforms to 127px */
+        top: 75px; /* transforms to 127px */
         right: 10px;
         font-family: "Nunito Sans";
         transition: all 0.1s ease-in-out;
@@ -115,26 +126,31 @@
 
 <body>
     <!--<?php include "scrambles/3x3.php" ?>-->
+    <div class="scramble-buttons" id="left-scramble-buttons">
+	<div><button id="copy" title="Copy" data-clipboard-target="#scramble-display"><i class="fa-solid fa-copy"></i></button></div>
+	<div><button id="lastscramble" title="Previous scramble"><i class="fa-solid fa-arrow-rotate-left"></i></button></div>
+    </div>
 
     <div id="scramble-generator">
         <!--<div class="mover">
                 …
-            </div>-->
-        <div id="scramble-container">
-            <div><button id="copy" title="Copy" data-clipboard-target="#scramble-display"><i
-                        class="fa-solid fa-copy"></i></button></div>
-            <div id="scramble-display">
-                <!-- The generated scramble will be displayed here --><button id="generate-button"
-                    title="New scramble"><i class="fa-solid fa-arrow-rotate-right"></i></button>
-            </div>
+	    </div>-->
+            <div id="scramble-container">
+                        <div id="scramble-display">
+                <!-- The generated scramble will be displayed here <button id="generate-button"
+                    title="New scramble"><i class="fa-solid fa-arrow-rotate-right"></i></button>-->
+	    </div>
+	</div>
+
+    </div>
+
+    <div class="scramble-buttons" id="right-scramble-buttons">
             <div><button id="generate-button" title="New scramble"><i
                         class="fa-solid fa-arrow-rotate-right"></i></button></div>
-            <div><button id="show-scramble-options" title="Options"><!--<i class="fa-solid fa-ellipsis">--><i class="fa-solid fa-chevron-down"></i></button>
-            </div>
+            <div><button id="show-scramble-options" title="Options"><!--<i class="fa-solid fa-ellipsis">--><i class="fa-solid fa-chevron-down"></i></button></div>
         </div>
 
 
-    </div>
     <div id="scramble-options">
         <div id="puzzletype">
             <label for="cubetype">Puzzle:</label>
@@ -426,14 +442,19 @@
 
 
     var windowWidth = window.innerWidth;
-    document.getElementById("scramble-container").style.width = (windowWidth - 300) + "px";
+    document.getElementById("scramble-container").style.width = (windowWidth - 480) + "px";
     document.getElementById("scramble-options").style.width = (windowWidth - 280) + "px";
 
     window.addEventListener('resize', function () {
         windowWidth = window.innerWidth;
-        document.getElementById("scramble-container").style.width = (windowWidth - 300) + "px";
+        document.getElementById("scramble-container").style.width = (windowWidth - 480) + "px";
         document.getElementById("scramble-options").style.width = (windowWidth - 280) + "px";
     })
+
+    if(document.getElementById("scramble-generator").scrollHeight > document.getElementById("scramble-generator)").scrollHeight) {
+	alert("TESTING!");
+	document.getElementById("left-scramble-buttons").style.flexDirection = "column";
+    }
 </script>
 
 </html>

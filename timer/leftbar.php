@@ -109,9 +109,44 @@
                     <option value="3">3</option>
                     <option value="4">4</option>
                 </select>-->
-            <div id="sessiondropdown">
-                <button id="dropdown-select">longsessionname!</button>
-                <div class="dropdown-content" id="sessions">
+	    <div id="sessiondropdown">
+<?php
+$sessions = array(
+	array(
+		"name" => "3x3",
+		"puzzle" => "3x3",
+		"mode" => "timed"
+	),
+	array(
+		"name" => "2x2",
+		"puzzle" => "2x2",
+		"mode" => "timed"
+	),
+	array(
+		"name" => "Megaminx",
+		"puzzle" => "megaminx",
+		"mode" => "timed"
+	),
+	/*array(
+		"name" => "3x3 Untimed",
+		"puzzle" => "3x3",
+		"mode" => "untimed"
+	)*/
+);
+		$buttonText = "session";
+		echo "<button id=\"dropdown-select\">$buttonText</button>";
+
+		/*echo "<div class=\"dropdown-content\" id=\"sessions\">"
+
+
+				for ($index = 0; $index < count($sessions); $index++) {
+					echo "<div id=\"session$index" + "div\">";
+					echo "<button id=\"session$index" + "\">" + $sessions[$index] + "<button>";
+					echo "<div>"; // PHP code is causing some elements to be missing.
+				}*/
+			?>
+
+		<!--
                     <div id="session1div">
                         <button id="session1">2</button>
                     </div>
@@ -120,7 +155,8 @@
                     </div>
                     <div id="session3div">
                         <button id="session3">4</button>
-                    </div>
+		    </div>
+		-->
                 </div>
             </div>
             <button id="addsession"><i class="fa-solid fa-plus"></i></button>
@@ -159,10 +195,10 @@
         }
     }
 
-    checkOverflow(document.getElementById("dropdown-select"));
+    /*checkOverflow(document.getElementById("dropdown-select"));
+    checkOverflow(document.getElementById("session0"));
     checkOverflow(document.getElementById("session1"));
-    checkOverflow(document.getElementById("session2"));
-    checkOverflow(document.getElementById("session3"));
+    checkOverflow(document.getElementById("session2"));*/
 
     var allSessionsShown = false;
     document.getElementById('addsession').addEventListener("click", function (e) {
@@ -189,31 +225,31 @@
         document.getElementById("stats").style.height = (windowHeight - 100) + "px";
     });
 
-    document.getElementById("dropdown-select").addEventListener("click", function () {
+   /* document.getElementById("dropdown-select").addEventListener("click", function () {
         if (allSessionsShown === false) {
-            inverseFlip(document.getElementById("session1"));
+            inverseFlip(document.getElementById("session0"));
             setTimeout(function () {
-                inverseFlip(document.getElementById("session2"));
+                inverseFlip(document.getElementById("session1"));
                 setTimeout(function () {
-                    inverseFlip(document.getElementById("session3"));
+                    inverseFlip(document.getElementById("session2"));
                 }, 40);
             }, 40);
             allSessionsShown = true;
         } else {
-            document.getElementById("session3").style.transform = 'rotateX(0deg)';
+            document.getElementById("session2").style.transform = 'rotateX(0deg)';
             setTimeout(function () {
-                document.getElementById("session2").style.transform = 'rotateX(0deg)';
+                document.getElementById("session1").style.transform = 'rotateX(0deg)';
                 setTimeout(function () {
-                    document.getElementById("session1").style.transform = 'rotateX(0deg)';
+                    document.getElementById("session0").style.transform = 'rotateX(0deg)';
                 }, 40);
             }, 40);
             allSessionsShown = false;
         }
-    })
+    })*/
 
     var sessioncontextmenuClicked = false;
 
-    document.getElementById("session1").addEventListener('contextmenu', function (event) {
+    /*document.getElementById("session0").addEventListener('contextmenu', function (event) {
         // Your code to run when the button is right-clicked
         if (sessioncontextmenuClicked === false) {
             document.getElementById("sessioncontextmenu").style.left = "185px"; // 60 + 120 + 5/*(document.getElementById("session1").style.left + document.getElementById("session1").style.width + 5).toString();*/
@@ -241,7 +277,7 @@
         if(window.innerHeight > window.innerWidth) {
             document.getElementById("stats").style.left = "100px";
         }
-    });
+    });*/
 
 </script>
 

@@ -72,11 +72,25 @@
         font: 600 600% "Nunito";
         width: 180px !important;
     }
+
+    #searchsettings {
+	background: var(--board1);
+	width: 100%;
+	font: 550 150% "Nunito Sans";
+    }
+
+    ::-webkit-input-placeholder {
+	font-style: italic;
+    }
+    ::-moz-placeholder {
+	font-style: italic;
+    }
 </style>
 
 <body>
     <?php include "nav.html" ?>
     <h1>Settings</h1>
+    <input type="text" id="searchsettings" placeholder="Search..."></input>
     <div class="settingheader">
         TIMER
     </div>

@@ -50,7 +50,8 @@
     }
 
     #timertype input[type='radio']+label {
-        display: flex;
+	display: flex;
+	padding: 15px;
     }
 
     #timertype input[type='radio']:checked+label {
@@ -85,6 +86,17 @@
     ::-moz-placeholder {
 	font-style: italic;
     }
+
+input[type="radio"] {
+	appearance: none;
+}
+
+#keyboardinput + label {
+	/*-webkit-appearance: none;
+	-moz-appearance: none;*/
+	background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/0a/QWERTY_keyboard.jpg');
+	background-size: cover;
+}
 </style>
 
 <body>

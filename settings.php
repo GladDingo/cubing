@@ -94,8 +94,9 @@ input[type="radio"] {
 #keyboardinput + label {
 	/*-webkit-appearance: none;
 	-moz-appearance: none;*/
-	background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/0a/QWERTY_keyboard.jpg');
-	background-size: cover;
+	/*background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/0a/QWERTY_keyboard.jpg');*/
+	background-image: url('https://images.pexels.com/photos/270435/pexels-photo-270435.jpeg');
+	background-size: 100%;
 }
 </style>
 

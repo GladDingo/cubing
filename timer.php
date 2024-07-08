@@ -19,11 +19,10 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
     <link rel="manifest" href="/manifest.webmanifest">
-</head>
 
 <style>
     body {
-        background: var(--bg);
+	padding: 5px;
         overflow: hidden;
     }
     button {
@@ -50,18 +49,45 @@
         outline: 2px solid var(--fontcolor);
     }
 
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(25px, 1fr));
+		gap: 5px;
+	}
+
+	.grid div {
+		background-color: var(--board2);
+		color: var(--fontcolor);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 25px;
+		font-size: 16px;
+		font-family: Nunito Sans;
+	}
 </style>
 
+</head>
+
+
 <body>
-    <?php include "nav.html";
+	<div class="grid">
+    <!--<?php /*include "nav.html";
     include "timer/onscreentimer.php";
     include "timer/scramble-generator.php";
     include "timer/leftbar.php";
     include "timer/createsession.php";
     include "timer/tools/drawscramble.php";
-    //include "settings.php" ?>
+    //include "settings.php"*/ ?>-->
+		<div draggable="true">1</div>
+		<div draggable="true">2</div>
+		<div draggable="true">3</div>
+		<div draggable="true">4</div>
+		<div draggable="true">5</div>
+	</div>
 </body>
 
-<script src="script.js">
+	    <script src="script.js">
+	    <script src="timer/grid.js">
 
 </html>

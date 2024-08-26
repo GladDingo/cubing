@@ -2,7 +2,6 @@
 ## Homepage
 ## Timer
 ### Features
-- [ ]
 ### Fixes
 ## Community
 ## Algorithms

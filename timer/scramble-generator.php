@@ -1,460 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+    <title>Timer</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <script src="https://kit.fontawesome.com/9c8c1521b1.js" crossorigin="anonymous"></script>
+
+    <!--<link rel="stylesheet" href="../tools/toolstyle.css">-->
+    <link rel="stylesheet" href="https://icons.cubing.net/css/cubing-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
         rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <link rel="manifest" href="/manifest.webmanifest">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
-</head>
+    <link rel="manifest" href="/manifest.webmanifest">
 
 <style>
-    #scramble-generator {
-        background: var(--board1);
-        color: var(--fontcolor);
-        display: flex;
-        justify-content: space-between;
-        /* Spacing between the scramble and buttons */
-        align-items: center;
-        /* Align vertically centered */
-        font-family: "Nunito Sans";
-        font-weight: 460;
-        font-size: 180%;
-        text-align: center;
-        padding: 10px;
-        /* Add padding as needed */
-        position: absolute;
-        top: 65px;
-        right: 10px;
-        /*width: 77.5%;*/
-    }
+	#scramble-generator {
+		grid-column: 1/-1;
+		grid-row: 1/3;
+		/*overflow: auto;*/
+		background: var(--board1);
+		padding: 5px;
+	}
 
-    #scramble-container {
-        display: flex;
-        align-items: center;
-        /* Center vertically within the container */
-        justify-content: flex-end;
-        /* Align buttons to the far right */
-        margin-right: 108px;
-        /* Add margin to create space between scramble and buttons */
-        /*width: 100%;
-        /* Make the container span the entire width of the page */
-        position: relative;
-    }
+	#scramble-container {
+		display: flex;
+		background: var(--board2);
+		grid-column: 2/-2;
+		grid-row: 1/3;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		font: 500 110% Nunito Sans;
+	}
 
-    #scramble-display {
-        flex-grow: 1;
-        /* Style for the scramble display area */
-        /*width: 100%;*/
-        /* Make the scramble display area span the entire width */
-    }
+	#prev-scramble {
+		grid-column: 1;
+		grid-row: 1;
+	}
 
-    .scramble-buttons {
-	background: var(--board1);
-	padding: 10px;
-	display: flex;
-	position: fixed;
-	top: 65px;
-	width: 82px;
-    }
+	#next-scramble {
+		grid-column: 1;
+		grid-row: 2;
+	}
 
-    .scramble-buttons button {
-	background: var(--board2);
-        color: var(--fontcolor);
-        border-width: 0;
-        padding: 10px;
-        width: 36px;
-        text-align: center;
-        margin-right: 10px;
-        /* Add margin to create space between buttons */
-    }
+	#copy-scramble {
+		grid-column: -2;
+		grid-row: 1;
+	}
 
-    #left-scramble-buttons {
-	left: 251px;
-    }
-
-    #right-scramble-buttons {
-	right: 10px;
-    }
-
-    /*#copy {
-        position: absolute;
-        left: 5px;
-        top: 5px;
-    }*/
-
-    #scramble-options {
-        z-index: -1;
-        background: var(--board1);
-        color: var(--fontcolor);
-        padding: 10px;
-        font-size: 125%;
-        text-align: center;
-        position: absolute;
-        top: 75px; /* transforms to 127px */
-        right: 10px;
-        font-family: "Nunito Sans";
-        transition: all 0.1s ease-in-out;
-        transform-origin: top center;
-        display: flex;
-        flex-direction: row;
-    }
-
-    #scramble-options input[type='number'],
-    #scramble-options select {
-        background: var(--board2);
-        color: var(--fontcolor);
-        border: 0;
-        font: 500 100% "Nunito Sans";
-    }
-
-    #cubetype {
-        background: var(--board2);
-        color: var(--fontcolor);
-    }
+	#show-scramble-options {
+		grid-column: -2;
+		grid-row: 2;
+	}
 </style>
 
+</head>
+
 <body>
-    <!--<?php include "scrambles/3x3.php" ?>-->
-    <div class="scramble-buttons" id="left-scramble-buttons">
-	<div><button id="copy" title="Copy" data-clipboard-target="#scramble-display"><i class="fa-solid fa-copy"></i></button></div>
-	<div><button id="lastscramble" title="Previous scramble"><i class="fa-solid fa-arrow-rotate-left"></i></button></div>
-    </div>
-
-    <div id="scramble-generator">
-        <!--<div class="mover">
-                …
-	    </div>-->
-            <div id="scramble-container">
-                        <div id="scramble-display">
-                <!-- The generated scramble will be displayed here <button id="generate-button"
-                    title="New scramble"><i class="fa-solid fa-arrow-rotate-right"></i></button>-->
-	    </div>
-	</div>
-
-    </div>
-
-    <div class="scramble-buttons" id="right-scramble-buttons">
-            <div><button id="generate-button" title="New scramble"><i
-                        class="fa-solid fa-arrow-rotate-right"></i></button></div>
-            <div><button id="show-scramble-options" title="Options"><!--<i class="fa-solid fa-ellipsis">--><i class="fa-solid fa-chevron-down"></i></button></div>
-        </div>
+	<div class="grid" id="scramble-generator">
+		<div id="scramble-container">
+			R' U B' R U2 F2 D2 R U2 L2 R' U' B' F' R D L' B U D B' R2 U D' R'
+		</div>
+		<button class="scramble-button" id="prev-scramble"><i class="fa-solid fa-arrow-left"></i></button>
+		<button class="scramble-button" id="next-scramble"><i class="fa-solid fa-arrow-right"></i></button>
+		<button class="scramble-button" id="copy-scramble"><i class="fa-solid fa-copy"></i></button>
+		<button class="scramble-button" id="show-scramble-options"><i class="cubing-icon event-333"></i></button>
 
 
-    <div id="scramble-options">
-        <div id="puzzletype">
-            <label for="cubetype">Puzzle:</label>
-            <select id="cubetype">
-                <option id="3x3">3x3</option>
-                <option id="megaminx">Megaminx</option>
-            </select>
-        </div>
-        &nbsp;&nbsp;
-        <div id="lengthofscrambles">
-            <label for="scramblelength">Scramble length:</label>
-            <input type="number" min="2" value="20">
-        </div>
-    </div>
+	</div> <!--scramble-generator-->
+
 </body>
-
-<script>
-
-    var scrambleOptionsShown = false;
-
-    const moves = ["U", "U'", "U2", "D", "D'", "D2", "L", "L'", "L2", "R", "R'", "R2", "F", "F'", "F2", "B", "B'", "B2"];
-
-    const newScramble = generateScramble();
-    updateScrambleDisplay(newScramble);
-
-    // Function to generate a random integer
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max);
-    }
-
-    // Function to generate a random scramble
-    function generateScramble() {
-        const scrambleLength = 20; // You can adjust this as needed
-        let scramble = "";
-
-        let previousMove = ""; // Initialize with an empty move
-
-        // Define an array of disallowed pattern pairs
-        const disallowedPatterns = [
-            ["U", "D", "U"],
-            ["U", "D", "U'"],
-            ["U", "D", "U2"],
-            ["U", "D'", "U"],
-            ["U", "D'", "U'"],
-            ["U", "D'", "U2"],
-            ["U", "D2", "U"],
-            ["U", "D2", "U'"],
-            ["U", "D2", "U2"],
-            ["U'", "D", "U"],
-            ["U'", "D", "U'"],
-            ["U'", "D", "U2"],
-            ["U'", "D'", "U"],
-            ["U'", "D'", "U'"],
-            ["U'", "D'", "U2"],
-            ["U'", "D2", "U"],
-            ["U'", "D2", "U'"],
-            ["U'", "D2", "U2"],
-            ["U2", "D", "U"],
-            ["U2", "D", "U'"],
-            ["U2", "D", "U2"],
-            ["U2", "D'", "U"],
-            ["U2", "D'", "U'"],
-            ["U2", "D'", "U2"],
-            ["U2", "D2", "U"],
-            ["U2", "D2", "U'"],
-            ["U2", "D2", "U2"],
-
-            ["L", "R", "L"],
-            ["L", "R", "L'"],
-            ["L", "R", "L2"],
-            ["L", "R'", "L"],
-            ["L", "R'", "L'"],
-            ["L", "R'", "L2"],
-            ["L", "R2", "L"],
-            ["L", "R2", "L'"],
-            ["L", "R2", "L2"],
-            ["L'", "R", "L"],
-            ["L'", "R", "L'"],
-            ["L'", "R", "L2"],
-            ["L'", "R'", "L"],
-            ["L'", "R'", "L'"],
-            ["L'", "R'", "L2"],
-            ["L'", "R2", "L"],
-            ["L'", "R2", "L'"],
-            ["L'", "R2", "L2"],
-            ["L2", "R", "L"],
-            ["L2", "R", "L'"],
-            ["L2", "R", "L2"],
-            ["L2", "R'", "L"],
-            ["L2", "R'", "L'"],
-            ["L2", "R'", "L2"],
-            ["L2", "R2", "L"],
-            ["L2", "R2", "L'"],
-            ["L2", "R2", "L2"],
-
-            ["F", "B", "F"],
-            ["F", "B", "F'"],
-            ["F", "B", "F2"],
-            ["F", "B'", "F"],
-            ["F", "B'", "F'"],
-            ["F", "B'", "F2"],
-            ["F", "B2", "F"],
-            ["F", "B2", "F'"],
-            ["F", "B2", "F2"],
-            ["F'", "B", "F"],
-            ["F'", "B", "F'"],
-            ["F'", "B", "F2"],
-            ["F'", "B'", "F"],
-            ["F'", "B'", "F'"],
-            ["F'", "B'", "F2"],
-            ["F'", "B2", "F"],
-            ["F'", "B2", "F'"],
-            ["F'", "B2", "F2"],
-            ["F2", "B", "F"],
-            ["F2", "B", "F'"],
-            ["F2", "B", "F2"],
-            ["F2", "B'", "F"],
-            ["F2", "B'", "F'"],
-            ["F2", "B'", "F2"],
-            ["F2", "B2", "F"],
-            ["F2", "B2", "F'"],
-            ["F2", "B2", "F2"],
-
-            ["D", "U", "D"],
-            ["D", "U", "D'"],
-            ["D", "U", "D2"],
-            ["D", "U'", "D"],
-            ["D", "U'", "D'"],
-            ["D", "U'", "D2"],
-            ["D", "U2", "D"],
-            ["D", "U2", "D'"],
-            ["D", "U2", "D2"],
-            ["D'", "U", "D"],
-            ["D'", "U", "D'"],
-            ["D'", "U", "D2"],
-            ["D'", "U'", "D"],
-            ["D'", "U'", "D'"],
-            ["D'", "U'", "D2"],
-            ["D'", "U2", "D"],
-            ["D'", "U2", "D'"],
-            ["D'", "U2", "D2"],
-            ["D2", "U", "D"],
-            ["D2", "U", "D'"],
-            ["D2", "U", "D2"],
-            ["D2", "U'", "D"],
-            ["D2", "U'", "D'"],
-            ["D2", "U'", "D2"],
-            ["D2", "U2", "D"],
-            ["D2", "U2", "D'"],
-            ["D2", "U2", "D2"],
-
-            ["R", "L", "R"],
-            ["R", "L", "R'"],
-            ["R", "L", "R2"],
-            ["R", "L'", "R"],
-            ["R", "L'", "R'"],
-            ["R", "L'", "R2"],
-            ["R", "L2", "R"],
-            ["R", "L2", "R'"],
-            ["R", "L2", "R2"],
-            ["R'", "L", "R"],
-            ["R'", "L", "R'"],
-            ["R'", "L", "R2"],
-            ["R'", "L'", "R"],
-            ["R'", "L'", "R'"],
-            ["R'", "L'", "R2"],
-            ["R'", "L2", "R"],
-            ["R'", "L2", "R'"],
-            ["R'", "L2", "R2"],
-            ["R2", "L", "R"],
-            ["R2", "L", "R'"],
-            ["R2", "L", "R2"],
-            ["R2", "L'", "R"],
-            ["R2", "L'", "R'"],
-            ["R2", "L'", "R2"],
-            ["R2", "L2", "R"],
-
-            ["B", "F", "B"],
-            ["B", "F", "B'"],
-            ["B", "F", "B2"],
-            ["B", "F'", "B"],
-            ["B", "F'", "B'"],
-            ["B", "F'", "B2"],
-            ["B", "F2", "B"],
-            ["B", "F2", "B'"],
-            ["B", "F2", "B2"],
-            ["B'", "F", "B"],
-            ["B'", "F", "B'"],
-            ["B'", "F", "B2"],
-            ["B'", "F'", "B"],
-            ["B'", "F'", "B'"],
-            ["B'", "F'", "B2"],
-            ["B'", "F2", "B"],
-            ["B'", "F2", "B'"],
-            ["B'", "F2", "B2"],
-            ["B2", "F", "B"],
-            ["B2", "F", "B'"],
-            ["B2", "F", "B2"],
-            ["B2", "F'", "B"],
-            ["B2", "F'", "B'"],
-            ["B2", "F'", "B2"],
-            ["B2", "F2", "B"],
-            ["B2", "F2", "B'"],
-            ["B2", "F2", "B2"]
-
-        ];
-
-
-        for (let i = 0; i < scrambleLength; i++) {
-            const randomMoveIndex = getRandomInt(moves.length);
-            const currentMove = moves[randomMoveIndex];
-
-            // Check for consecutive redundant moves
-            if (i > 0 && currentMove.charAt(0) === previousMove.charAt(0)) {
-                i--; // Retry this iteration to generate a different move
-                continue;
-            }
-
-            // Check for disallowed patterns
-            if (
-                i > 1 &&
-                disallowedPatterns.some(pattern => {
-                    return (
-                        currentMove.charAt(0) === pattern[0] &&
-                        previousMove.charAt(0) === pattern[1]
-                    );
-                })
-            ) {
-                i--; // Retry this iteration to generate a different move
-                continue;
-            }
-
-            scramble += currentMove + " ";
-            previousMove = currentMove;
-        }
-
-        return scramble.trim();
-    }
-
-    ////
-
-    document.addEventListener('DOMContentLoaded', function () {
-        var clipboard = new ClipboardJS('#copy');
-        var sessionsShown = false;
-
-        clipboard.on('success', function (e) {
-            console.log('Scramble copied:', e.text);
-            e.clearSelection();
-        });
-
-        clipboard.on('error', function (e) {
-            console.error('Failed to copy text:', e.text);
-        });
-    });
-
-    let scrambleGeneratedManually = false;
-
-    // Function to update the scramble display on the webpage
-    function updateScrambleDisplay(scramble) {
-        const scrambleDisplay = document.getElementById("scramble-display");
-        scrambleDisplay.textContent = scramble;
-    }
-
-    document.getElementById("generate-button").addEventListener("click", function () {
-        const newScramble = generateScramble();
-        updateScrambleDisplay(newScramble);
-        document.getElementById('copy').innerHTML = '<i class="fa-solid fa-copy"></i>';
-        document.getElementById('copy').setAttribute('title', "Copy");
-    });
-
-    document.getElementById("copy").addEventListener("click", function () {
-        this.innerHTML = '<i class="fa-solid fa-check"></i>';
-        this.setAttribute('title', "Copied!");
-    })
-
-    document.getElementById("show-scramble-options").addEventListener("click", function () {
-        if (scrambleOptionsShown === false) {
-            document.getElementById("scramble-options").style.top = "127px";
-            setTimeout(() => {
-                document.getElementById("scramble-options").style.top = "120px";
-            }, 100);
-            scrambleOptionsShown = true;
-        } else {
-            document.getElementById("scramble-options").style.transform = "rotateX(0deg)";
-            scrambleOptionsShown = false;
-        }
-    })
-
-
-
-    var windowWidth = window.innerWidth;
-    document.getElementById("scramble-container").style.width = (windowWidth - 480) + "px";
-    document.getElementById("scramble-options").style.width = (windowWidth - 280) + "px";
-
-    window.addEventListener('resize', function () {
-        windowWidth = window.innerWidth;
-        document.getElementById("scramble-container").style.width = (windowWidth - 480) + "px";
-        document.getElementById("scramble-options").style.width = (windowWidth - 280) + "px";
-    })
-
-    if(document.getElementById("scramble-generator").scrollHeight > document.getElementById("scramble-generator)").scrollHeight) {
-	alert("TESTING!");
-	document.getElementById("left-scramble-buttons").style.flexDirection = "column";
-    }
-</script>
 
 </html>

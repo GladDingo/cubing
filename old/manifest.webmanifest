@@ -1,0 +1,15 @@
+{
+    "name": "Cubing",
+    "short_name": "Cubing",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "Cubing timer!",
+    "icons": [
+        {
+            "src": "logos/500.png",
+            "sizes": "500x500",
+            "type": "image/png"
+        }
+    ]
+}

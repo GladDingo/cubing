@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -21,35 +20,55 @@
     <link rel="manifest" href="/manifest.webmanifest">
 
 <style>
-.grid {
-	display: grid;
-	/*grid-template-columns: repeat(auto-fill, minmax(25px, 1fr));
-	grid-template-rows: repeat(auto-fill, minmax(25px, 1fr));*/
-	grid-template: repeat(auto-fill, minmax(25px, 1fr));
-	grid-auto-rows: 1fr;
-	gap: 5px;
-}
+	#times {
+		background: var(--board1);
+		grid-column: 1/8;
+		grid-row: 6/99;
+		/*padding: 5px;*/
+	}
 
-#overlay {
-	position: fixed;
-	top: 0; left: 0; right: 0; bottom: 0;
-	z-index: 2;
-	display: none;
-	width: 100%; height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-}
+	table {
+		width: 100%;
+		border-spacing: 5px;
+	}
+
+	th, td {
+		background: var(--board2);
+		text-align: center;
+	}
 </style>
 
 </head>
 
 <body>
-	<div class="grid">
-		<?php require 'timer/scramble-generator.php';
-require 'timer/session.php';
-require 'timer/times.php'?>
+	<div id="times">
+		<table>
+			<tr>
+				<th>time</th>
+				<th>ao5</th>
+			</tr>
+			<tr>
+				<td>8.076</td>
+				<td>-</td>
+			</tr>
+			<tr>
+				<td>7.165</td>
+				<td>-</td>
+			</tr>
+			<tr>
+				<td><i>6.789</i></td>
+				<td>-</td>
+			</tr>
+			<tr>
+				<td>9.023</td>
+				<td>-</td>
+			</tr>
+			<tr>
+				<td><b><i>5.643</i></b></td>
+				<td>7.343</td>
+			</tr>
+		</table>
 	</div>
-
-	<div id="overlay"></div>
 </body>
 
 </html>

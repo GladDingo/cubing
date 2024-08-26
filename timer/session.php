@@ -21,35 +21,60 @@
     <link rel="manifest" href="/manifest.webmanifest">
 
 <style>
-.grid {
-	display: grid;
-	/*grid-template-columns: repeat(auto-fill, minmax(25px, 1fr));
-	grid-template-rows: repeat(auto-fill, minmax(25px, 1fr));*/
-	grid-template: repeat(auto-fill, minmax(25px, 1fr));
-	grid-auto-rows: 1fr;
-	gap: 5px;
-}
+	#session-manager {
+		background: var(--board1);
+		grid-column: 1/8;
+		grid-row: 3/6;
+		padding: 5px;
+	}
 
-#overlay {
-	position: fixed;
-	top: 0; left: 0; right: 0; bottom: 0;
-	z-index: 2;
-	display: none;
-	width: 100%; height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-}
+	#select-session {
+		grid-column: 1/-1;
+		grid-row: 1;
+		font: 500 100% Nunito Sans;
+	}
+
+	#new-session {
+		grid-column: 1/4;
+		grid-row: 2;
+		font: 600 80% Nunito;
+	}
+
+	#clear-session {
+		grid-column: 4/7;
+		grid-row: 2;
+		font: 600 80% Nunito;
+	}
+
+	#delete-session {
+		grid-column: 1/4;
+		grid-row: 3;
+		font: 600 80% Nunito;
+	}
+
+	#rename-session {
+		grid-column: 4/7;
+		grid-row; 3;
+		font: 600 80% Nunito;
+	}
+
+	#time-list {
+		grid-column: 1/-1;
+		grid-row: 4/-1;
+		background: var(--board2);
+	}
 </style>
 
 </head>
 
 <body>
-	<div class="grid">
-		<?php require 'timer/scramble-generator.php';
-require 'timer/session.php';
-require 'timer/times.php'?>
+	<div class="grid" id="session-manager">
+		<button id="select-session">session</button>
+		<button id="new-session"><i class="fa-solid fa-plus"></i> New</button>
+		<button id="clear-session"><i class="fa-solid fa-bomb"></i> Clear</button>
+		<button id="delete-session"><i class="fa-solid fa-dumpster-fire"></i> Delete</button>
+		<button id="rename-session"><i class="fa-solid fa-i-cursor"></i> Rename</button>
 	</div>
-
-	<div id="overlay"></div>
 </body>
 
 </html>
